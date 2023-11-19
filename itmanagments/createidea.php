@@ -1,15 +1,75 @@
 <?php
     session_start();
     include 'dbconnect.php';
+
+    $connect = "mysql:host=$DATABASE_HOST;dbname=$DATABASE_NAME;charset=utf8mb4";
+
+    try {
+        $pdo = new PDO($connect, $DATABASE_USER, $DATABASE_PASS);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch (PDOException $e) {
+        die("Connection failed: " . $e->getMessage());
+    }
+
+    $sql = "SELECT DISTINCT category_id,name FROM ideas INNER JOIN categories on ideas.category_id=categories.id ";
+    $result = $con->query($sql);
+    $categories = array();
+    if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $categories[] = $row['category_id'].$row['name'];
+       
+      
+    }
+    
+}
+
+// Handle form submission to filter ideas based on category
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['category_id'])) {
+    $selectedCategory = $_POST['category_id'];
+  
+    $sql = "SELECT * FROM ideas WHERE category_id = '$selectedCategory'  ";
+    $result = $con->query($sql);
+    $filteredIdeas = array();
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $filteredIdeas[] = $row;
+        }
+    }
+}
+$sql = "SELECT DISTINCT ie_id,ename FROM ideas INNER JOIN  ideasevent on ideas.ie_id=ideasevent.id";
+$result = $con->query($sql);
+$event = array();
+if ($result->num_rows > 0) {
+while ($row = $result->fetch_assoc()) {
+    $event[] = $row['ie_id'].$row['ename'];
+}
+}
+
+// Handle form submission to filter ideas based on event
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ie_id'])) {
+$selectedEvent = $_POST['ie_id'];
+$sql = "SELECT * FROM ideas WHERE ie_id = '$selectedEvent'";
+$result = $con->query($sql);
+$filteredIdeas = array();
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $filteredIdeas[] = $row;
+    }
+}
+}
     if(isset($_POST['add'])){
         $title = $_POST['title'];
-$explanation = $_POST['explanation'];
-$category_id = $_POST['category_id'];
+    $explanation = $_POST['explanation'];
+    $category_id = $_POST['category_id'];
     $ie_id=$_POST['ie_id'];
+   
 
-
+    // Assuming the idea has been successfully inserted into the database and reviewed_status is false
+ 
+        
 
 $db_add = "INSERT INTO ideas (title, explanation, category_id,ie_id) VALUES ('$title', '$explanation', '$category_id','$ie_id')";
+
 $kq=mysqli_query($con,$db_add);
 if($kq) {
     echo "Add a new idea succesfully .";
@@ -18,29 +78,18 @@ if($kq) {
     echo "failed to add a new idea" . mysqli_error($con);
 }
 
-$query = "SELECT * FROM ideas WHERE category_id = '$category_id' ";
-$result = mysqli_query($con, $query);
-
-if (mysqli_num_rows($result) > 0) {
-    while ($row = mysqli_fetch_assoc($result)) {
-        echo "Tiêu đề: " . $row['title'] . "<br>";
-        echo "Mô tả: " . $row['explanation'] . "<br>";
-      
-        echo "<hr>";
-        
-    }
-} else {
-    echo "Không có ý tưởng nào trong danh mục này.";
-} 
-
 
     }
+
+
 ?>
+
 <html>
-    <head><meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <style>
-        * {
+    <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+    * {
   box-sizing: border-box;
 }
 
@@ -144,9 +193,9 @@ padding: 40px 40px;    width: 60%;
 </div>
 <br>    <div class="header"><h1>CREATE NEW IDEA</h1></div>
     <br>
-        <div class="container ">
-            <form action='createidea.php' method="post">
-              <div class="row">
+    <div class="container">
+            <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+            <div class="row">
     <div class="col-25">
                 <label for="title">Idea Title</label><br>
     </div>
@@ -162,31 +211,49 @@ padding: 40px 40px;    width: 60%;
                 <input type="text" name="explanation" placeholder="Idea Explanation "required><br>
     </div>
   </div>
-   <div class="row">
-    <div class="col-25">
-                <label for="ie_id">Idea event id</label><br>
-    </div>
-    <div class="col-75">
-                <input type="text" name="ie_id" placeholder="Idea Of Event "required><br>
-    </div>
-  </div>
-
   <div class="row">
-    <div class="col-25">
-                <label for="category_id">Idea cat_id</label><br>
-    </div>
-    <div class="col-75">
-                        <input type="text" name="category_id" placeholder="Idea Of Category "required><br>
+   <div class="col-75">
+                <label for="category_id">Select a Category:</label>
+        <select id="category" name="category_id" required>
+            <?php
+    
+            foreach ($categories as $category) {
+                
+                
+                echo "<option value='".$category."'>".$category."</option>";
+           
+               
+                
+            }
 
-      
-    </div>
-  </div>
-   <div class="row">
-    <div class="col-25"><label for="termsandc"> Terms and condition</label></div>
-    <div class="col-75"> 
-<input type="radio"  value="I agreed"required>I Agreed <br></div></div>
-              <div class="row">
-    <div class="col-10">  <input type="submit" name="add" value="Add"> </div> </div>
+            ?>
+        </select><br></div>
+        <div class="col-25">
+        <label for="Event">Select a Event:</label>
+        <select id="ievent" name="ie_id" required>
+            <?php
+    
+            foreach ($event as $ievent) {
+                
+                
+                echo "<option value='".$ievent."'>".$ievent."</option>";
+           
+               
+                
+            }
+
+            ?>
+        </select>  </div>
+ 
+        </div>
+                <div class="row">
+                    <label for="termsandc"> Terms and Condition</label></div>
+                    <div class="col-75"> 
+                <input type="radio"  value="I agreed"required>I Agreed <br></div></div>
+            <div class="row">
+            <div class="col-10">  <input type="submit" name="add" value="Add"> </div> </div>
+                </div>
+                </div>
                 <?php
                 if(isset($_POST['add'])){
                     $db_query="SELECT i.title, i.explanation, i.category_id,c.name ,i.ie_id,c.description
@@ -195,22 +262,19 @@ padding: 40px 40px;    width: 60%;
                     $returnback=mysqli_query($con,$db_query);
                     if(mysqli_num_rows($returnback)>0){
                         while($q=mysqli_fetch_array($returnback)){
+                            echo"<div style='border-bottom:1px solid black;padding:10px 10px;'>";
                             echo'<h4>Idea title:'.$q['title'].'</h4>';
                             echo'<h4>Idea explanation:'.$q['explanation'].'</h4>';
                             echo'<h4>Idea category_id:'.$q['category_id'].'</h4>';
                             echo'<h4>Idea event_id:'.$q['ie_id'].'</h4>';
                             echo'<h4>categories name:'.$q['name'].'</h4>';
-                            echo'<h4>category description:'.$q['description'].'</h4>';
-                          
-                          
-                    
+                            echo'<h4>category description:'.$q['description'].'</h4>';  
+                            echo"</div>";
                     }
-                    }
-                
-                }
-                
-                
+                    }            
+                }        
                 ?>
+                
             </form>
         </div>
     </body>
