@@ -7,16 +7,18 @@ $stmt = $con->prepare("SELECT fullname,email,department FROM user WHERE id = ? "
 // In this case we can use the account ID to get the account info.
 $stmt->bind_param('i', $_SESSION['id']);
 $stmt->execute();
-$stmt->bind_result($fullname, $email,$department);
+$stmt->bind_result($fullname, $email, $department);
 $stmt->fetch();
 $stmt->close();
 ?>
 <html>
-    <head><meta charset="UTF-8">
+
+<head><meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title> Staff Page</title></head>
-        <style>thead{
+        <title> List of user Page</title></head>
+        <style>
+        thead{
                 font-weight: bold;
                 text-align: center;
                }
@@ -29,55 +31,84 @@ padding: 40px 40px;    width: 100%;
     color: white;
     text-align: center;
     font-family: monospace;
+    margin-bottom: 20px;
 }
+tr,td{
+    padding:10px 10px;
+    font-size:18px;
+  
+}
+body{
+    background-image:url('picture3.jpg');
+   
+}   
            </style>
+</head>
+
+<body>
+
     <body>
-            <div class="header"><h1>LIST OF USERS </h1></div>
+        <div>
+            <a href="adminhomepage.php">Admin homepage </a>
+            <div class="header"> <h1> List of User details are below: </h1></div>
+          
+        </div>
+        <table width="100%" border="1" style="border-collapse:collapse;">
+            <thead>
+                <tr>
+                    <th><strong>S.No</strong></th>
+                    <th><strong>User fullname</strong></th>
+                    <th><strong>User email </strong></th>
+                    <th><strong>User department </strong></th>
+                    <th><strong>User username </strong></th>
+                    <th><strong>User email</strong></th>
+                    <th><strong>Role of User</strong></th>
+                    <th><strong>User account password</strong></th>
+                </tr>
+            </thead>
+            <tbody>
 
-				<table width="100%" border="1" style="border-collapse:collapse;">
-                <thead>
-<tr>
-<th ><strong>No</strong></th>
-<th><strong>Fullname</strong></th>
-<th><strong>Email </strong></th>
-
-
-<th><strong>Department </strong></th>
-
-<th><strong>Username </strong></th>
-<th><strong>User's Email </strong></th>
-<th><strong>Role</strong></th>
-<th><strong>Password</strong></th>
-
-</tr>
-                </thead>
-<tbody>
-
-<?php
-    $count=1;
-    $test="SELECT u.fullname, u.email, u.department,a.username ,a.password,a.email,a.role
+                <?php
+                $count = 1;
+                $test = "SELECT u.fullname, u.email, u.department,a.username ,a.password,a.email,a.role
     FROM user AS u
     JOIN acc AS a ON u.id = a.id";
-    $back=mysqli_query($con,$test);
-    while($row = mysqli_fetch_assoc($back)) { ?>
-   
-        <tr><td ><?php echo $count; ?></td>
-        <td ><?php echo $row["fullname"]; ?></td>
-        <td ><?php echo $row["email"]; ?></td>
-        
-        <td ><?php echo $row["department"];?></td>
-        <td ><?php echo $row["username"];?></td>
-        <td ><?php echo $row["email"];?></td>
-        <td ><?php echo $row["role"];?></td>
-        <td ><?php echo $row["password"];?></td>
-       
+                $back = mysqli_query($con, $test);
+                while ($row = mysqli_fetch_assoc($back)) { ?>
 
-        </tr>
-<?php $count++; } ?>
+                <tr>
+                    <td id="a">
+                        <?php echo $count; ?>
+                    </td>
+                    <td id="a">
+                        <?php echo $row["fullname"]; ?>
+                    </td>
+                    <td id="a">
+                        <?php echo $row["email"]; ?>
+                    </td>
+                    <td id="a">
+                        <?php echo $row["department"]; ?>
+                    </td>
+                    <td id="a">
+                        <?php echo $row["username"]; ?>
+                    </td>
+                    <td id="a">
+                        <?php echo $row["email"]; ?>
+                    </td>
+                    <td id="a">
+                        <?php echo $row["role"]; ?>
+                    </td>
+                    <td id="a">
+                        <?php echo $row["password"]; ?>
+                    </td>
+                </tr>
+                <?php $count++;
+                } ?>
 
-</tbody>
-                </table>
+            </tbody>
+        </table>
 
-			</div>
+        </div>
     </body>
+
 </html>
