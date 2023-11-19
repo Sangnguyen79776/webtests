@@ -80,7 +80,7 @@ $connect = "mysql:host=$DATABASE_HOST;dbname=$DATABASE_NAME;charset=utf8mb4";?>
         }
             ?>
             <?php
-
+    $q=date('H:i:a');
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
  
@@ -94,7 +94,7 @@ $mail = new PHPMailer(true);
         // Other necessary configuration settings for the SMTP server
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->SMTPDebug = 3;
+    
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
         $mail->Username = 'sangntgch190109@fpt.edu.vn';
@@ -105,7 +105,7 @@ $mail = new PHPMailer(true);
         $mail->isHTML(true);
         $mail->Subject = 'New Comment Submission';
         $mail->Body = "A new comment has been submitted for review. Here is the comment information:feeback info : $txt_ 
-        <br>Information of commenter :$accu_id";
+        <br>Information of commenter :$accu_id<br> The time of submission : $q";
        
         $mail->send();
         echo 'Email has been sent successfully';
