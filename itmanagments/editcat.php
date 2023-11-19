@@ -56,7 +56,7 @@ $row = mysqli_fetch_assoc($status);
 </head>
 
 <body>
-    <h2>Edit Idea Information</h2>
+    <h2>Edit Category Information</h2>
 
     <?php
 
