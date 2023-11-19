@@ -103,7 +103,7 @@ margin:auto;padding: 40px 40px;    width: 80%;
     text-align: center;
     font-family: monospace;
 }
-}
+
 
         </style>
     </head>
@@ -150,18 +150,11 @@ echo '<p style="color:#FF0000;">'.$info.'</p>';}
     
     ?>
      
-           <body ><div class="top-nav-index">QAC </div>
+           <body ><div class="top-nav-index">QAC account </div>
     <div class="w3-bar" style="background-color:#CA8CE9;float:right;">
-            <a href="qacoordinatorhomepage.php" class="w3-bar-item w3-button">HOME</a>
+            <a href="adminhomepage.php" class="w3-bar-item w3-button">HOME</a>
 
-            <div class="w3-dropdown-hover">
-                <button class="w3-button">IDEA</button>
-                <div class="w3-dropdown-content w3-bar-block w3-card-4">
-                    <a href="viewallofidea.php" class="w3-bar-item w3-button">View All Idea</a>
-                    <a href="ideamanagementhomepage.php" class="w3-bar-item w3-button">Idea Home</a>
-                   
-                </div>
-            </div>
+            
             
             
           
@@ -169,7 +162,7 @@ echo '<p style="color:#FF0000;">'.$info.'</p>';}
                 <button class="w3-button">PORTFOLIO</button>
                 <div class="w3-dropdown-content w3-bar-block w3-card-4">
                     <a href="viewlistofqacoordinator.php" class="w3-bar-item w3-button">View All QAC Account</a>
-                    <a href="editqacoordinatoracc.php" class="w3-bar-item w3-button">Profile</a>
+                    <a href="adminprofile.php" class="w3-bar-item w3-button">Profile</a>
                     <a href="logout.php" class="w3-bar-item w3-button">Logout</a>
                 </div>
             </div>
@@ -199,7 +192,7 @@ required value="<?php echo $row['password'];?>" /></p>
 
 <div class="row">
     <div class="col-25">
-        <label c=for="role">Role:</label></div>
+        <label for="role">Role:</label></div>
         <div class="col-15">
 <select id="role" name="role">
                             <option value="admin">
