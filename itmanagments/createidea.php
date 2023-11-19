@@ -3,7 +3,37 @@
     include 'dbconnect.php';
 
     $connect = "mysql:host=$DATABASE_HOST;dbname=$DATABASE_NAME;charset=utf8mb4";
-
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+     
+    require 'PHPMailer-master/src/Exception.php';
+    require 'PHPMailer-master/src/PHPMailer.php';
+    require 'PHPMailer-master/src/SMTP.php';
+    $mail = new PHPMailer(true);
+        try {
+            $mail->SMTPDebug=3;
+            $mail->isSMTP(); // Set mailer to use SMTP
+            // Other necessary configuration settings for the SMTP server
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+            $mail->Username = 'bomberlauna@gmail.com';
+            $mail->Password = 'tpky ndzb lgoy qqae'; 
+            $mail->setFrom('bomberlauna@gmail.com', 'Notification');
+            $mail->addAddress('bomberlauna@gmail.com', 'QA Coordinator');
+            
+            $mail->isHTML(true);
+            $mail->Subject = 'New Idea Submission';
+            $mail->Body = "A new idea has been submitted for review. Here is the idea information:title: $title 
+            <br>idea explantion:$explanation<br>idea category: $category_id<br>idea event id: $ie_id";
+           
+            $mail->send();
+            echo 'Email has been sent successfully';
+        } catch (Exception $e) {
+            echo "Email could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
     try {
         $pdo = new PDO($connect, $DATABASE_USER, $DATABASE_PASS);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
