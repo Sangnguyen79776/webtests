@@ -1,156 +1,10 @@
 <?php
 session_start();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>
 <html>
-      <head>
-
-        <meta charset="UTF-8">
+    <head>
+    <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> QAC Page</title>
@@ -184,8 +38,8 @@ session_start();
             <div class="w3-dropdown-hover">
                 <button class="w3-button">Idea</button>
                 <div class="w3-dropdown-content w3-bar-block w3-card-4">
-                    <a href="viewallofidea.php" class="w3-bar-item w3-button">View All Idea</a>
-                    <a href="ideamanagementhomepage.php" class="w3-bar-item w3-button">Idea Home</a>
+                    <a href="ideaviewlistforqac.php" class="w3-bar-item w3-button">View All Idea</a>
+                    
                 </div>
             </div>
             
@@ -194,13 +48,13 @@ session_start();
             <div class="w3-dropdown-hover">
                 <button class="w3-button">QAC</button>
                 <div class="w3-dropdown-content w3-bar-block w3-card-4">
-                    <a href="editqacoordinatoracc.php" class="w3-bar-item w3-button">Profile</a>
+                
                     <a href="logout.php" class="w3-bar-item w3-button">Logout</a>
                 </div>
             </div>
 
         </div>
-     <div>
-            <a href="cmtidea.php">Write a comment for idea</a>
+     
+           
     </body>
 </html>
