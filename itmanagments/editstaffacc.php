@@ -187,23 +187,11 @@ echo '<p style="color:#FF0000;">'.$info.'</p>';}
           <div class="dropdown">
                 <button class="dropbtn"><a href="staff.php" style="color:#ffffff"><i style="font-size:18px; padding:0px 6px" class="fa">&#xf0a8;</i>HOME</a></button>
             </div>
-            <div class="dropdown">
-                <button class="dropbtn">IDEA</button>
-                <div class="dropdown-content">
-                     <a href="viewallofidea.php" >IDEAS</a>
-                    <a href="ideamanagementhomepage.php" >IDEA HOME</a>
-                </div>
-            </div>
-         <div class="dropdown">
-             <button class="dropbtn">UPLOAD</button>
-                <div class="dropdown-content">
-                    <a href="postideawithpdffile.php" ><i class="fa-solid fa-paperclip"></i>FILE PDF</a>
-                </div>
-            </div>
+       
             <div class="dropdown">
              <button class="dropbtn">PORTFOLIO</button>
                 <div class="dropdown-content">
-                    <a href="editstaffacc.php" >PROFILE</a>
+                    <a href="adminprofile.php" >PROFILE</a>
                     <a href="logout.php" >LOG OUT</a>
                 </div>
             </div>
