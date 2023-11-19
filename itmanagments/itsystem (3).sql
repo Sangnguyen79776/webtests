@@ -100,6 +100,7 @@ INSERT INTO `categories` (`id`, `name`, `description`) VALUES
 CREATE TABLE `comment` (
   `id` int(11) NOT NULL,
   `feedback_info` varchar(255) NOT NULL,
+    `mode` varchar(255) NOT NULL,
   `accu_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
