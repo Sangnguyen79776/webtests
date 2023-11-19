@@ -1,22 +1,116 @@
 
 <html>
-    <head>
-        <h2>Post idea by pdf file Form</h2>
+    <head> <meta charset="utf-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   
+       <meta name='viewport' content='width=device-width, initial-scale=1'>
+ <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+        <style>
+            input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+ input[type=number], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+ input[type=file], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 10%;
+  background-color: rgb(230, 0, 0);
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+input[type=submit]:hover {
+  background-color: rgb(230, 0, 0);
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: rgb(87, 6, 140) ;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #ffffff;
+}
+div {
+  border-radius: 5px;
+  background-color: rgb(245, 231, 254);
+  padding: 20px;
+}
+h2{font-weight: bold;}</style>
     </head>
     <body>
+ <ul>
+            <li><a href="staff.php"><i class="glyphicon glyphicon-user" style="color:white;"></i>
+</a></li>
+
+         <li><a href="ideamanagementhomepage.php">IDEA HOME</a></li>
+
+  <li><a href="filterideabycategory.php">IDEA OF CATEGORY</a></li>
+  <li><a href="filterideabyevent.php">IDEA OF EVENT</a></li>
+  <li><a href="createidea.php">NEW IDEA</a></li>
+  <li><a href="viewallofidea.php">IDEAS</a></li>
+  <li><a href="postideawithpdffile.php">FILE</a></li>
+
+ 
+</ul>
         <div>
+            <h2>UPLOAD PDF FILE OF IDEA</h2>
         <form action="postideawithpdffile.php" method="post" enctype="multipart/form-data">
-    <label for="title">Title:</label>
-    <input type="text" name="title" id="title" required><br>
-    <label for="explanation">Explantion:</label>
-    <textarea name="explanation" id="explanation" required></textarea><br>
-    <label for="category_id">cat_id:</label>
-    <input type="number" name="category_id" id="category_id" required><br>
-   
-    <label for="file">Upload PDF:</label>
-    <input type="file" name="file" id="file"><br>
-       <label for="termsandc"> Terms and condition</label><input type="checkbox"  value="I agreed"required>I agreed <br>
+  <label for="title">Idea Title:</label>
+    <input type="text" name="title" id="title" required>
+
+    <label for="explanation">Explanation:</label>
+    <input type="text" id="explanation" name="explanation" placeholder="" required>
+
+    <label for="category_id">Idea Of Category:</label>
+     <input type="number" name="category_id" id="category_id" required>
+   <label for="file">Upload PDF File:<i class='glyphicon glyphicon-paperclip' style='font-size:16px;color:red'></i>
+</label>
+    <input type="file" name="file" id="file">
+       <label for="termsandc"> Terms & Conditions:</label><input type="radio"  value="I agreed"required>I Agreed <br>
     <input type="submit" value="Submit" name="post">
+  
     <?php
         session_start();
         include 'dbconnect.php';
