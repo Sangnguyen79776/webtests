@@ -5,7 +5,7 @@
     $connect = "mysql:host=$DATABASE_HOST;dbname=$DATABASE_NAME;charset=utf8mb4";
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
-     
+     $gettime=date('H:i:a');
     require 'PHPMailer-master/src/Exception.php';
     require 'PHPMailer-master/src/PHPMailer.php';
     require 'PHPMailer-master/src/SMTP.php';
@@ -16,7 +16,7 @@
             // Other necessary configuration settings for the SMTP server
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            
+     
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
             $mail->Username = 'bomberlauna@gmail.com';
@@ -27,7 +27,7 @@
             $mail->isHTML(true);
             $mail->Subject = 'New Idea Submission';
             $mail->Body = "A new idea has been submitted for review. Here is the idea information:title: $title 
-            <br>idea explantion:$explanation<br>idea category: $category_id<br>idea event id: $ie_id";
+            <br>idea explantion:$explanation<br>idea category: $category_id<br>idea event id: $ie_id<br> Time of submisstion:$gettime";
            
             $mail->send();
             echo 'Email has been sent successfully';
