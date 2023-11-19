@@ -13,6 +13,17 @@ $stmt->close();
 <html>
     <head>
        <h2>View comment Form</h2>
+       <style>
+            h2{
+                text-align: center;
+            }
+            tr,td{
+                padding:10px 10px;
+            }
+            body{
+                background-image: url('picture2.jpg');
+            }
+       </style>
     </head>
     <body>
     <table width="100%" border="1" style="border-collapse:collapse;">
@@ -21,7 +32,7 @@ $stmt->close();
 <th ><strong>S.No</strong></th>
 <th><strong>Comment </strong></th>
 <th><strong>Account id from staff </strong></th>
-<th><strong>Option </strong></th>
+
 
 
 
