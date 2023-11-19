@@ -70,7 +70,7 @@ $connect = "mysql:host=$DATABASE_HOST;dbname=$DATABASE_NAME;charset=utf8mb4";?>
                $kqins= mysqli_query($con, $ins) ;
                while ($row = mysqli_fetch_assoc($kqins)) {
                 $accu_id = $row['accu_id'] .$row['username']?: 'Anonymous';
-                
+                 echo"You have selected $mode for activate private mode<br> ";
                 echo "Unkown";
                 $addcmt="INSERT INTO comment(feedback_info,accu_id) VALUES('$txt_','$accu_id')";
                 mysqli_query($con, $addcmt) or die(mysqli_connect_error());
