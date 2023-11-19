@@ -1,21 +1,31 @@
 <?php
     session_start();
     include 'dbconnect.php';
+    $connect = "mysql:host=$DATABASE_HOST;dbname=$DATABASE_NAME;charset=utf8mb4";
+    try {
+        $pdo = new PDO($connect, $DATABASE_USER, $DATABASE_PASS);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch (PDOException $e) {
+        die("Connection failed: " . $e->getMessage());
+    }
 
-
-    $sql = "SELECT DISTINCT category_id FROM ideas";
+    $sql = "SELECT DISTINCT category_id,name FROM ideas INNER JOIN categories on ideas.category_id=categories.id ";
     $result = $con->query($sql);
     $categories = array();
     if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $categories[] = $row['category_id'];
+        $categories[] = $row['category_id'].$row['name'];
+       
+      
     }
+    
 }
 
 // Handle form submission to filter ideas based on category
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['category_id'])) {
     $selectedCategory = $_POST['category_id'];
-    $sql = "SELECT * FROM ideas WHERE category_id = '$selectedCategory'";
+  
+    $sql = "SELECT * FROM ideas WHERE category_id = '$selectedCategory'  ";
     $result = $con->query($sql);
     $filteredIdeas = array();
     if ($result->num_rows > 0) {
@@ -29,19 +39,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['category_id'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Ideas </title>
-     <meta charset="utf-8">
+    <title>Ideas Filter</title>
+    <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/"></script>
  <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-        
-        <style>
-           .dropbtn {
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <style>
+ .dropbtn {
   background-color: rgb(87, 6, 140);
   color: #ffffff;
   padding: 16px;
@@ -117,7 +124,9 @@ li a:hover:not(.active) {
 }
   </style>
 </head>
-<body> <div class="nav-bar">
+
+<body>
+<div class="nav-bar">
           <div class="dropdown">
                 <button class="dropbtn"><a href="staff.php" style="color:#ffffff">HOME</a></button>
             </div>
@@ -137,29 +146,27 @@ li a:hover:not(.active) {
             </div>
     </div>
 
-       <div>
-    <h1>Filter Ideas by Category</h1>
+      <div>
+      <h1>Filter Ideas by Category</h1>
     <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-        <label for="category_id">Select a category:</label>
+        <label for="category_id">Select a Category:</label>
         <select id="category" name="category_id">
             <?php
+    
             foreach ($categories as $category) {
+                
+                
                 echo "<option value='".$category."'>".$category."</option>";
+           
+               
+                
             }
+
             ?>
         </select>
         <button type="submit">Filter</button>
     </form>
-<div>
-   <div class="idea-no">
-   <a>Idea 1:</a>
-<a>User:</a>
-<a>Category Id:</a>
-<a>Explanation:</a>
 
-</div> 
-    <div></div>
-</div>
     <?php
     if (isset($filteredIdeas)) {
         echo "<h2>Ideas in category: ".$selectedCategory."</h2>";
