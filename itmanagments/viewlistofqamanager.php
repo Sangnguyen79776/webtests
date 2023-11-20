@@ -48,15 +48,24 @@ $stmt->close();
     a {
         text-align: center;
     }
+    .menu>a{
+        text-decoration: none;
+        font-size:18px;
+        background-color: lightblue;
+        padding:10px 10px;
+        margin-top:10px;
+    }
     </style>
 </head>
-
-<div>
+<body>
+<div class ="menu">
     <a href="adminhomepage.php">Admin homepage </a>
     <img src="picture4.png">
+    </div>
 
     <h1> List of QA manager details are below: </h1>
-</div>
+    
+
 <table width="100%" border="1" style="border-collapse:collapse;">
     <thead>
         <tr>
