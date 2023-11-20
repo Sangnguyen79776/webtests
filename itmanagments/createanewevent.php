@@ -21,6 +21,27 @@ if ($result) {
     echo "Lỗi truy vấn: " . mysqli_error($con);
 }
 
+$sql = "SELECT DISTINCT idease_id,title FROM ideasevent INNER JOIN  ideas on ideasevent.idease_id=ideas.id";
+$result = $con->query($sql);
+$eventI = array();
+if ($result->num_rows > 0) {
+while ($row = $result->fetch_assoc()) {
+    $eventI[] = $row['idease_id'].$row['title'];
+}
+}
+
+// Handle form submission to filter ideas based on event
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['idease_id'])) {
+$selectedI = $_POST['idease_id'];
+$sql = "SELECT * FROM ideasevent WHERE idease_id = '$selectedI'";
+$result = $con->query($sql);
+$ideaselection = array();
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $ideaselection[] = $row;
+    }
+}
+}
 ?>
 <html>
 
@@ -79,9 +100,14 @@ if ($result) {
         <input type="date" class="form-control" name="deadline" placeholder="Enter a event deadline ..." />
     </div><br>
     <div class="from-group">
-        <label for="idease_id">Link ideas_id To event </label><br><br>
-        <input type="number" class="form-control" name="idease_id"
-            placeholder="Enter a event idease_ideas ..." /><br><br>
+    <label for="idease_id">Select a idea :</label>
+        <select id="idease" name="idease_id" style="padding:10px 10px;">
+            <?php
+            foreach ($eventI as $idease) {
+                echo "<option value='".$idease."'>".$idease."</option>";
+            }
+            ?>
+        </select><br>
         <input id="a" type="submit" name="add" value="Add">
         <?php
         if (isset($_POST['add'])) {
