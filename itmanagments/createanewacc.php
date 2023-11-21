@@ -58,7 +58,7 @@
         $password = mysqli_real_escape_string($con, $_POST['password']);
         $passwordconfirm = mysqli_real_escape_string($con, $_POST['passwordconfirm']);
         $role = mysqli_real_escape_string($con, $_POST['role']);
-
+        $department = mysqli_real_escape_string($con, $_POST['department']);
         // we validate data by using array_push func 
         if (empty($username)) {
             array_push($notify, "Username is required");
@@ -84,8 +84,8 @@
         if (count($notify) == 0) {
             $password = md5($password); //encrypt the password before saving in the database
     
-            $db_query = "INSERT INTO acc (username, password, role,email) 
-                      VALUES('$username', '$password', '$role','$email')";
+            $db_query = "INSERT INTO acc (username, password, role,email,department) 
+                      VALUES('$username', '$password', '$role','$email','$department')";
             $u_query = mysqli_query($con, $db_query);
             if ($u_query) {
                 echo '<div style="color:olive;text-transform:uppercase;background-color:orange;text-align:center;"><b>Register successfully </b></div>';
@@ -132,6 +132,21 @@
                     </select>
                 </div><br>
                 <div class="from-group">
+                    <label for="department">Role</label><br>
+                    <select id="depart" name="department">
+                        <option value="IT">
+                            IT
+                        </option>
+                        <option value="business">
+                            Teacher
+                        </option>
+                        
+                        <option value="none">
+                            None
+                        </option>
+                    </select>
+                </div>
+                <div class="from-group">
                     <label for="email">Email</label><br>
                     <input type="text" class="form-control" name="email" placeholder="Enter your email here:  ..."
                         notrequired>
@@ -139,59 +154,4 @@
                 <input id="a" type="submit" id="btn" name="accounts"> </input>
 </body>
 
-</html>
-            
-              
-               
-            }else{
-                print_r($notify);
-                echo'<div style="color:red;text-transform:uppercase;background-color:salmon;text-align:center;"><b>Fail to register </b></div>';
-            }
-            }
-          
-            
-        
-        
-           ?>
-           <div >
-	
-    <div >
-<div>
-    <div >
-    <form action="createanewacc.php" method="post" class="form">
-       
-        <label for="username">Name</label><br>
-        <input type="text" class="form-control" name="username" placeholder="Enter your name ..."/>
-			</div>
-            <div class="from-group">
-        <label for="password">Password</label><br>
-        <input type="password" class="form-control" name="password" placeholder="Enter your password ..."/>
-
-            </div>
-            <div class="from-group">
-        <label for="passwordconfirm">Comfirm password </label><br>
-        <input type="password" class="form-control" name="passwordconfirm" placeholder="Enter your password ..."/>
-
-            </div>
-            <div class="from-group">
-        <label for="role">Role</label><br>
-        <select id="role" name="role">
-                        <option value="staff">
-                            Staff
-                        </option>
-                        <option value="admin">
-                            Admin
-                        </option>
-                        <option value="QAmanager">QAmanager</option>
-                        <option value="QAcoordinator">QAcoordinator</option>
-        </select>
-
-            </div>
-            <div class="from-group">
-        <label for="email">Email</label><br>
-        <input type="text" class="form-control" name="email" placeholder="Enter your email here:  ..."notrequired>
-        
-            </div>
-            <input type="submit"id="btn" name="accounts">   </input>
-    </body>
 </html>
