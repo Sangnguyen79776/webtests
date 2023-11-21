@@ -175,9 +175,9 @@ h6{
         </style>
 
     <body>
-    <div class="top-nav-index">STAFF <i class="fa fa-sign-out" style="float:right;font-size: 28px; "> </i>
+    <div class="top-nav-index">STAFF <a href="logout.php"><i class="fa fa-sign-out" style="float:right;font-size: 28px; "> </i></a>
 </div>
- 
+
          <div class="container-fluid">
   <div class="row content">
     <div class="col-sm-3 sidenav hidden-xs" style="background-color:#ffffff; color:white"><i class="fa fa-navicon" style="font-size:16px; color:rgb(87,6,140); padding:10px "></i>
@@ -189,14 +189,13 @@ h6{
                 <li><a href="staff.php" style="color:rgb(87, 6, 140)">MESSAGES<i class="fa fa-comment" style="padding: 5px 5px;"></i>
 </a></li>
 
-        <li><a href="eventmanagemnet.php" style="color:rgb(87, 6, 140)">EVENTS<i class="fa fa-object-group" style="padding: 5px 5px;"></i>
-</a></li>
+       
 
         <li> 
                     <a href="ideamanagementhomepage.php" style="color:rgb(87, 6, 140)">IDEAS <i class="fa fa-lightbulb-o" style="padding: 5px 5px;"></i>
 </a></li>
         <li><a href="postideawithpdffile.php" style="color:rgb(87, 6, 140)">DOCUMENTS<i class="fa fa-folder" style="padding: 5px 5px;"></i></a></li>
-        <li>  <a href="editstaffacc.php" style="color:rgb(87, 6, 140)" >PROFILE<i class="fa fa-user-circle" style="padding: 5px 5px;"></i></a></li>
+        <li>  <a href="staffprofile.php" style="color:rgb(87, 6, 140)" >PROFILE<i class="fa fa-user-circle" style="padding: 5px 5px;"></i></a></li>
       </ul><br>
     </div>
     <br>
