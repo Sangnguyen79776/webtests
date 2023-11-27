@@ -11,9 +11,9 @@ if (isset($_POST['add'])) {
     $result = mysqli_query($con, $query);
 
     if ($result) {
-        echo "Thêm danh mục thành công.";
+        echo "Add new category successfully.";
     } else {
-        echo "Thêm danh mục thất bại: " . mysqli_error($con);
+        echo "Failed to add: " . mysqli_error($con);
     }
 }
 
