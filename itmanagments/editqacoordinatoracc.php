@@ -115,10 +115,10 @@ margin:auto;padding: 40px 40px;    width: 80%;
        $id=$_REQUEST['id'];
     $username=$_REQUEST['username'];
     $password=$_REQUEST['password'];
-    $email=$_REQUEST['email'];
+
     $role=$_REQUEST['role'];
          
-    $check="SELECT *FROM acc where  username='$username' OR email='$email' OR password='$password'" ;
+    $check="SELECT *FROM acc where  username='$username'  OR password='$password'" ;
     $v_c=mysqli_query($con,$check);
     $notify= mysqli_fetch_assoc($v_c);
         if($notify){
@@ -129,19 +129,16 @@ margin:auto;padding: 40px 40px;    width: 80%;
              
            
             }
-            if($notify['email']===$email){
-                echo"the email you have edited is $email have already existed so you cannot use this email anymore....<br>Please enter again<br>";
-                echo"Failed to update the user information   (email)" ;
-            }
+            
         }else{
             $password=md5($password);
     $update="UPDATE acc set
-    username='".$username."', password='".$password."',email='".$email."',role='".$role."' where id='".$id."'";
+    username='".$username."', password='".$password."',role='".$role."' where id='".$id."'";
     
     
     mysqli_query($con, $update) or die(mysqli_connect_error());
-$info = "Staff Account Updated Successfully. </br></br>
-<a href='viewlistofstaffaccount.php'>Details of Updated Staff account information  </a>";
+$info = "QAC Account Updated Successfully. </br></br>
+<a href='viewlistofqacoordinator.php'>Details of Updated QAC account information  </a>";
 echo '<p style="color:#FF0000;">'.$info.'</p>';}
 }else {
     
@@ -188,7 +185,7 @@ echo '<p style="color:#FF0000;">'.$info.'</p>';}
         <p><input type="password" name="password" style="height:200px;" placeholder="Enter Password here......" 
 required value="<?php echo $row['password'];?>" /></p>
 <label for="email">Email </label>
-<p><input type="text" name="email " placeholder="Enter staff account email:" required value="<?php echo $row['email'];?>" /></p></div></div>
+<p><input type="text" name="email " placeholder="Enter QAC account email:" required value="<?php echo $row['email'];?>" /></p></div></div>
 
 <div class="row">
     <div class="col-25">
