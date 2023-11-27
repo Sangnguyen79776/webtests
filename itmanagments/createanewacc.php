@@ -132,7 +132,7 @@
                     </select>
                 </div><br>
                 <div class="from-group">
-                    <label for="department">Role</label><br>
+                    <label for="department">Department</label><br>
                     <select id="depart" name="department">
                         <option value="IT">
                             IT
