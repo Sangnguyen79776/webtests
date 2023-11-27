@@ -166,7 +166,7 @@ h3{
              
     mysqli_query($con, $modify) or die(mysqli_connect_error());
             $info = "Idea Information Updated Successfully. </div></br>
-            <a href='viewallofidea.php'>Details of Updated Idea Information </a>";
+            <a href='ideav.php'>Details of Updated Idea Information </a>";
             echo '<p style="color:#FF0000;">'.$info.'</p>';}
             }else {
        
@@ -183,7 +183,7 @@ h3{
     <div class="col-65">    <input name="id" type="hidden" value="<?php echo $row['id'];?>" />
         <p><input type="text" name="title" placeholder="Enter the idea title here........." required value="<?php echo $row['title'];?>" /></p></div></div>
         <div class="row">
-    <div class="col-25"> <label for="explanation">User explantion</label></div><div class="col-65">
+    <div class="col-25"> <label for="explanation">Idea explantion</label></div><div class="col-65">
         <p><input type="text" name="explanation"  placeholder="Enter idea explanation here..." required value="<?php echo $row['explanation'];?>"></p></div></div>
      <div class="row">
     <div class="col-25">   <label for="category_id">Idea category_id  </label></div>
