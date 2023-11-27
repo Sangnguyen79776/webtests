@@ -11,7 +11,18 @@ $row = mysqli_fetch_assoc($status);
 ?>
 <html>
     <head>
-
+    <style>
+        .from-group{
+            text-align: center;
+            background-image: url('picture3.jpg');
+        }
+        input{
+            padding:10px 10px;
+        }
+        select{
+            padding:10px 10px;
+        }
+    </style>
     </head>
     <?php
     $kq="";
@@ -20,10 +31,10 @@ $row = mysqli_fetch_assoc($status);
        $id=$_REQUEST['id'];
     $username=$_REQUEST['username'];
     $password=$_REQUEST['password'];
-    $email=$_REQUEST['email'];
+  
     $role=$_REQUEST['role'];
          
-    $check="SELECT *FROM acc where  username='$username' OR email='$email' OR password='$password'" ;
+    $check="SELECT *FROM acc where  username='$username' OR password='$password'" ;
     $v_c=mysqli_query($con,$check);
     $notify= mysqli_fetch_assoc($v_c);
         if($notify){
@@ -34,19 +45,16 @@ $row = mysqli_fetch_assoc($status);
              
            
             }
-            if($notify['email']===$email){
-                echo"the email you have edited is $email have already existed so you cannot use this email anymore....<br>Please enter again<br>";
-                echo"Failed to update the user information   (email)" ;
-            }
+           
         }else{
             $password=md5($password);
     $update="UPDATE acc set
-    username='".$username."', password='".$password."',email='".$email."',role='".$role."' where id='".$id."'";
+    username='".$username."', password='".$password."',role='".$role."' where id='".$id."'";
     
     
     mysqli_query($con, $update) or die(mysqli_connect_error());
-$info = "Staff Account Updated Successfully. </br></br>
-<a href='viewlistofstaffaccount.php'>Details of Updated Staff account information  </a>";
+$info = "QAM Account Updated Successfully. </br></br>
+<a href='viewlistofqamanager.php'>Details of Updated QAM account information  </a>";
 echo '<p style="color:#FF0000;">'.$info.'</p>';}
 }else {
     
@@ -56,9 +64,9 @@ echo '<p style="color:#FF0000;">'.$info.'</p>';}
     ?>
        <body >
     <div class="from-group">
-    
+
     <div >
-        <form action="editstaffacc.php" method="post">
+        <form action="editqamanageracc.php" method="post">
             <input type="hidden" name="new" value="1"/>
         <label for="username">Username </label>
         <input name="id" type="hidden" value="<?php echo $row['id'];?>" />
@@ -67,7 +75,8 @@ echo '<p style="color:#FF0000;">'.$info.'</p>';}
         <p><input type="password" name="password" style="height:200px;" placeholder="Enter Password here......" 
 required value="<?php echo $row['password'];?>" /></p>
 <label for="email">Email </label>
-<p><input type="text" name="email " placeholder="Enter staff account email:" required value="<?php echo $row['email'];?>" /></p>
+<p><input type="text" name="email " placeholder="Enter QAM account email:" required value="<?php echo $row['email'];?>" /></p>
+<label name="role" >Role</label>
 <select id="role" name="role">
                             <option value="admin">
                             Admin 
