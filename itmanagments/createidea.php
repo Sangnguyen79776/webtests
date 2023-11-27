@@ -3,37 +3,7 @@
     include 'dbconnect.php';
 
     $connect = "mysql:host=$DATABASE_HOST;dbname=$DATABASE_NAME;charset=utf8mb4";
-    use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\Exception;
-     $gettime=date('H:i:a');
-    require 'PHPMailer-master/src/Exception.php';
-    require 'PHPMailer-master/src/PHPMailer.php';
-    require 'PHPMailer-master/src/SMTP.php';
-    $mail = new PHPMailer(true);
-        try {
-            $mail->SMTPDebug=3;
-            $mail->isSMTP(); // Set mailer to use SMTP
-            // Other necessary configuration settings for the SMTP server
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-     
-            $mail->SMTPSecure = 'tls';
-            $mail->Port = 587;
-            $mail->Username = 'bomberlauna@gmail.com';
-            $mail->Password = 'tpky ndzb lgoy qqae'; 
-            $mail->setFrom('bomberlauna@gmail.com', 'Notification');
-            $mail->addAddress('bomberlauna@gmail.com', 'QA Coordinator');
-            
-            $mail->isHTML(true);
-            $mail->Subject = 'New Idea Submission';
-            $mail->Body = "A new idea has been submitted for review. Here is the idea information:title: $title 
-            <br>idea explantion:$explanation<br>idea category: $category_id<br>idea event id: $ie_id<br> Time of submisstion:$gettime";
-           
-            $mail->send();
-            echo 'Email has been sent successfully';
-        } catch (Exception $e) {
-            echo "Email could not be sent. Mailer Error: {$mail->ErrorInfo}";
-        }
+
     try {
         $pdo = new PDO($connect, $DATABASE_USER, $DATABASE_PASS);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -69,11 +39,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['category_id'])) {
 $sql = "SELECT DISTINCT ie_id,ename FROM ideas INNER JOIN  ideasevent on ideas.ie_id=ideasevent.id";
 $result = $con->query($sql);
 $event = array();
+
 if ($result->num_rows > 0) {
 while ($row = $result->fetch_assoc()) {
     $event[] = $row['ie_id'].$row['ename'];
 }
+
 }
+ 
+
 
 // Handle form submission to filter ideas based on event
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ie_id'])) {
@@ -87,32 +61,34 @@ if ($result->num_rows > 0) {
     }
 }
 }
-    if(isset($_POST['add'])){
-        $title = $_POST['title'];
-    $explanation = $_POST['explanation'];
-    $category_id = $_POST['category_id'];
-    $ie_id=$_POST['ie_id'];
-   
 
-    // Assuming the idea has been successfully inserted into the database and reviewed_status is false
+
  
-        
+// Assuming the idea has been successfully inserted into the database and reviewed_status is false
+
+if(isset($_POST['add'])){
+    $title = $_POST['title'];
+$explanation = $_POST['explanation'];
+$category_id = $_POST['category_id'];
+$ie_id=$_POST['ie_id'];
+
+
+
+    
 
 $db_add = "INSERT INTO ideas (title, explanation, category_id,ie_id) VALUES ('$title', '$explanation', '$category_id','$ie_id')";
 
 $kq=mysqli_query($con,$db_add);
 if($kq) {
-    echo "Add a new idea succesfully .";
-    echo"<br>";
+echo "Add a new idea succesfully .";
+echo"<br>";
 } else {
-    echo "failed to add a new idea" . mysqli_error($con);
+echo "failed to add a new idea" . mysqli_error($con);
 }
 
-
-    }
-
-
+}
 ?>
+
 
 <html>
     <head>
@@ -301,11 +277,50 @@ padding: 40px 40px;    width: 60%;
                             echo'<h4>category description:'.$q['description'].'</h4>';  
                             echo"</div>";
                     }
-                    }            
-                }        
+                    
+            
+                } 
+            }
+  
+            $con->close()  ;
                 ?>
-                
+              
             </form>
+            <?php
+ use PHPMailer\PHPMailer\PHPMailer;
+ use PHPMailer\PHPMailer\Exception;
+  $gettime=date('H:i:a');
+ require 'PHPMailer-master/src/Exception.php';
+ require 'PHPMailer-master/src/PHPMailer.php';
+ require 'PHPMailer-master/src/SMTP.php';
+ $mail = new PHPMailer(true);
+     try {
+         $mail->SMTPDebug=3;
+         $mail->isSMTP(); // Set mailer to use SMTP
+         // Other necessary configuration settings for the SMTP server
+         $mail->Host = 'smtp.gmail.com';
+         $mail->SMTPAuth = true;
+    
+         $mail->SMTPSecure = 'tls';
+         $mail->Port = 587;
+         $mail->Username = 'bomberlauna@gmail.com';
+         $mail->Password = 'tpky ndzb lgoy qqae'; 
+         $mail->setFrom('bomberlauna@gmail.com', 'Notification');
+         $mail->addAddress('bomberlauna@gmail.com', 'QA Coordinator');
+         
+         $mail->isHTML(true);
+         $mail->Subject = 'New Idea Submission';
+         $mail->Body = "A new idea has been submitted for review. Here is the idea information:title: $title 
+         <br>idea explantion:$explanation<br>idea category: $category_id<br>idea event id: $ie_id<br> Time of submission:$gettime";
+        
+         $mail->send();
+         echo 'Email has been sent successfully';
+     } catch (Exception $e) {
+         echo "Email could not be sent. Mailer Error: {$mail->ErrorInfo}";
+     }
+
+
+?>
         </div>
     </body>
 
