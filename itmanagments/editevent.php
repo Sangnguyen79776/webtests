@@ -45,7 +45,7 @@ $row = mysqli_fetch_assoc($status);
 </head>
 
 <body>
-    <h2>Edit Idea Information Page</h2>
+    <h2>Edit Event Information Page</h2>
     <img src="picture4.png">
     <?php
 
@@ -53,7 +53,7 @@ $row = mysqli_fetch_assoc($status);
         $id = $_REQUEST['id'];
         $ename = $_REQUEST['ename'];
         $deadline = $_REQUEST['deadline'];
-        $ideas_id = $_REQUEST['ideas_id'];
+        $ideaid = $_REQUEST['idease_id'];
         $check = "SELECT *FROM ideasevent where ename='$ename' OR deadline ='$deadline' ";
         $v_c = mysqli_query($con, $check);
         $notify = mysqli_fetch_assoc($v_c);
@@ -67,7 +67,7 @@ $row = mysqli_fetch_assoc($status);
         } else {
 
             $modify = "UPDATE ideasevent set 
-            ename='" . $ename . "', deadline='" . $deadline . "',idease_id='" . $idease_id . "'where id='" . $id . "'";
+            ename='" . $ename . "', deadline='" . $deadline . "',idease_id='" . $ideaid . "'where id='" . $id . "'";
 
             mysqli_query($con, $modify) or die(mysqli_connect_error());
             $info = "Event Information Updated Successfully. </div></br>
@@ -80,12 +80,12 @@ $row = mysqli_fetch_assoc($status);
         <input type="hidden" name="new" value="1" />
         <label for="ename">Event name </label>
         <input name="id" type="hidden" value="<?php echo $row['id']; ?>" />
-        <p><input type="text" name="title" placeholder="Enter the event name here........." required
+        <p><input type="text" name="ename" placeholder="Enter the event name here........." required
                 value="<?php echo $row['ename']; ?>" /></p>
         <label for="deadline">Event deadline</label>
         <p><input type="date" name="deadline" placeholder="Enter event deadline here..." required
                 value="<?php echo $row['deadline']; ?>"></p>
-        <label for="idease_id">Ideas link to event </label>
+        <label for="ideas_id">Ideas link to event </label>
         <p><input type="number" name="idease_id" placeholder="Enter idease_id here..." min="1" max="3" required
                 value="<?php echo $row['idease_id']; ?>"></p>
         <input id="a" type="submit" name="submit" value="Submit">
