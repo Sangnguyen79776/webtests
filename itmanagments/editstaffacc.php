@@ -147,10 +147,10 @@ h3{
        $id=$_REQUEST['id'];
     $username=$_REQUEST['username'];
     $password=$_REQUEST['password'];
-    $email=$_REQUEST['email'];
+  
     $role=$_REQUEST['role'];
          
-    $check="SELECT *FROM acc where  username='$username' OR email='$email' OR password='$password'" ;
+    $check="SELECT *FROM acc where  username='$username'  OR password='$password'" ;
     $v_c=mysqli_query($con,$check);
     $notify= mysqli_fetch_assoc($v_c);
         if($notify){
@@ -161,14 +161,11 @@ h3{
              
            
             }
-            if($notify['email']===$email){
-                echo"the email you have edited is $email have already existed so you cannot use this email anymore....<br>Please enter again<br>";
-                echo"Failed to update the user information   (email)" ;
-            }
+          
         }else{
             $password=md5($password);
     $update="UPDATE acc set
-    username='".$username."', password='".$password."',email='".$email."',role='".$role."' where id='".$id."'";
+    username='".$username."', password='".$password."',role='".$role."' where id='".$id."'";
     
     
     mysqli_query($con, $update) or die(mysqli_connect_error());
@@ -182,10 +179,10 @@ echo '<p style="color:#FF0000;">'.$info.'</p>';}
     
     ?>
        <body >
- <div class="top-nav-index">STAFF </div>
+ <div class="top-nav-index">STAFF accounts form</div>
  <div class="nav-bar">
           <div class="dropdown">
-                <button class="dropbtn"><a href="staff.php" style="color:#ffffff"><i style="font-size:18px; padding:0px 6px" class="fa">&#xf0a8;</i>HOME</a></button>
+                <button class="dropbtn"><a href="adminhomepage.php" style="color:#ffffff"><i style="font-size:18px; padding:0px 6px" class="fa">&#xf0a8;</i>HOME</a></button>
             </div>
        
             <div class="dropdown">
