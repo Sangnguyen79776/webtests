@@ -75,8 +75,10 @@ STAFF </a>
   <li><a href="filterideabycategory.php" style="color:rgb(87, 6, 140)">IDEA OF CATEGORY</a></li>
   <li><a href="filterideabyevent.php" style="color:rgb(87, 6, 140)">IDEA OF EVENT</a></li>
   <li><a href="createidea.php" style="color:rgb(87, 6, 140)">NEW IDEA</a></li>
-  <li><a href="createidea.php"style="color:rgb(87, 6, 140)" >NEW IDEA</a></li>
-  <li><a href="viewallofidea.php"style="color:rgb(87, 6, 140)">IDEAS</a></li>
+
+ 
+
+  <li><a href="ideav.php"style="color:rgb(87, 6, 140)">IDEAS List</a></li>
   <li><a href="postideawithpdffile.php" style="color:rgb(87, 6, 140)">FILE</a></li>
 
  
