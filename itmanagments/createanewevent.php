@@ -15,10 +15,10 @@ if ($result) {
             echo "<hr>";
         }
     } else {
-        echo "Không có event nào đang có sẵn.";
+        echo "No event avaiable right now .";
     }
 } else {
-    echo "Lỗi truy vấn: " . mysqli_error($con);
+    echo "SQL query error: " . mysqli_error($con);
 }
 
 $sql = "SELECT DISTINCT idease_id,title FROM ideasevent INNER JOIN  ideas on ideasevent.idease_id=ideas.id";
@@ -132,7 +132,7 @@ if ($result->num_rows > 0) {
                     echo "<hr>";
                 }
             } else {
-                echo "Không có event nào trong danh mục này.";
+                echo "Dont have any event in that list.";
             }
         }
         ?>
