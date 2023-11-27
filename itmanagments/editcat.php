@@ -96,8 +96,8 @@ $row = mysqli_fetch_assoc($status);
             <input name="id" type="hidden" value="<?php echo $row['id']; ?>" />
             <p><input type="text" name="name" placeholder="Enter the category name here........." required
                     value="<?php echo $row['name']; ?>" /></p>
-            <label for="description">User Explantion</label>
-            <p><input type="text" name="description" placeholder="Enter idea description here..." required
+            <label for="description">Category description</label>
+            <p><input type="text" name="description" style="height:300px;"placeholder="Enter idea description here..." required
                     value="<?php echo $row['description']; ?>"></p>
 
             <input id="a" type="submit" name="submit" value="Submit">
