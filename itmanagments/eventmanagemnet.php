@@ -60,7 +60,7 @@ $stmt->close();
         <a href="createanewevent.php">Create a new event </a>
         <img src="picture4.png">
         </div>
-        <h1> List of Ideas:</h1>
+        <h1> List of Event:</h1>
     
 
     <table width="100%" border="1" style="border-collapse:collapse;">
