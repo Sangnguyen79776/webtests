@@ -35,7 +35,7 @@ $connect = "mysql:host=$DATABASE_HOST;dbname=$DATABASE_NAME;charset=utf8mb4";?>
             <p>What have you thought about the quality of our features and blogs?</p>
             <textarea name="feedback_info" rows="8" cols="40"></textarea><br>
             <label for="mode">Anoymous:</label>
-            <select name="mode">
+            <select name="mode" >
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
             </select><br>
@@ -70,7 +70,7 @@ $connect = "mysql:host=$DATABASE_HOST;dbname=$DATABASE_NAME;charset=utf8mb4";?>
                $kqins= mysqli_query($con, $ins) ;
                while ($row = mysqli_fetch_assoc($kqins)) {
                 $accu_id = $row['accu_id'] .$row['username']?: 'Anonymous';
-                 echo"You have selected $mode for activate private mode<br> ";
+                echo"You have selected $mode for activate private mode<br> ";
                 echo "Unkown";
                 $addcmt="INSERT INTO comment(feedback_info,accu_id) VALUES('$txt_','$accu_id')";
                 mysqli_query($con, $addcmt) or die(mysqli_connect_error());
