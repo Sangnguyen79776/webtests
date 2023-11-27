@@ -45,6 +45,7 @@
     <a href="createanewacc.php">Create Account </a><br>
     <a href="filterlistofacc.php">Filter list Account (role name)</a><br>
     <a href="eventmanagemnet.php"> Eventmanagemnet Homepage</a><br>
+    <a href="Viewidea.php">List of idea</a>
     <a href="logout.php">Log Out</a><br>
 </body>
 
