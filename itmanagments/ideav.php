@@ -23,7 +23,7 @@ $ideas = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 
 
-<?php include('server.php'); ?>
+<?php include('validateaction.php'); ?>
 
 <html>
     <head>
@@ -155,7 +155,7 @@ body{
    
    </div>
    </form>
-  <script src="script.js"></script>
+  <script src="actionscript.js"></script>
     </body>
 </html>
 
