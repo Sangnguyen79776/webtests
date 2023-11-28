@@ -155,7 +155,7 @@ body{
    
    </div>
    </form>
-  <script src="actionscript.js"></script>
+  <script src="script.js"></script>
     </body>
 </html>
 
