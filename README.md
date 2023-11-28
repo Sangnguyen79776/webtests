@@ -8,5 +8,5 @@
 and $mail->password when you have generated your app password in your real gmail you have assign<br>
 You need to add SMTP Debug to your coding line when you create a new object for PHPMailer <br>
 4. ideav is a file for staff when they have viewed all idea list<br>
-in this file I have include server.php to check the action when user have clicked on button <br>
-in this file I have include script.js by using ajax and jquery to select all the declarable of actions when user have clicked on button and display number of like or dislike  
+in this file I have include validateaction.php to check the action when user have clicked on button <br>
+in this file I have include actionscript.js by using ajax and jquery to select all the declarable of actions when user have clicked on button and display number of like or dislike  
