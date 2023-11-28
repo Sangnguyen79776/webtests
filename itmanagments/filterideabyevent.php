@@ -50,6 +50,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ie_id'])) {
     h1{
         text-align:center;
     }
+    select{
+        width:200px;
+    }
 </style>
 </head>
 <body>
@@ -82,5 +85,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ie_id'])) {
     ?>
 
 </body>
-</html>
 </html>
