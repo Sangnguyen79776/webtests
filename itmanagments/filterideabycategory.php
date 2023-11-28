@@ -140,7 +140,7 @@ li a:hover:not(.active) {
                 <button class="dropbtn"><a href="filterideabyevent.php" style="color:#ffffff">IDEA OF EVENT</a></button>
             </div>
             <div class="dropdown">
-                <button class="dropbtn"><a href="viewallofidea.php" style="color:#ffffff">IDEAS</a></button>
+                <button class="dropbtn"><a href="ideav.php" style="color:#ffffff">IDEAS</a></button>
             </div> <div class="dropdown">
                 <button class="dropbtn" ><a href="postideawithpdffile.php" style="color:#ffffff">FILE</a></button>
             </div>
